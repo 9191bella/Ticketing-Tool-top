@@ -1,0 +1,7 @@
+# Kompilierte Java-Klassen
+bin/
+*.class
+
+# macOS
+.DS_Store
+__MACOSX/

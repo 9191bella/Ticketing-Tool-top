@@ -76,6 +76,8 @@ public class TicketAdministration {
         }
     }   
 
+    // Sortiert die Tickets alphabetisch nach dem Namen des bearbeitenden Agenten.
+    // Nicht zugewiesene Tickets (kein Agent) werden über einen leeren String einsortiert.
     public void getAllTicketsSortedByAgent(){
         tickets.sort(Comparator.comparing(ticket -> ticket.getResolvedBy() != null ? ticket.getResolvedBy().getName() : ""));
         for(Ticket ticket : tickets){
@@ -83,11 +85,13 @@ public class TicketAdministration {
         }
     }
 
+    // Sortiert die Tickets nach Fälligkeitsdatum (frühestes zuerst).
+    // Tickets ohne Fälligkeitsdatum (null) werden ans Ende sortiert (nullsLast).
     public void getAllTicketsSortedByDueDate(){
         tickets.sort(Comparator.comparing(Ticket::getDueDate, Comparator.nullsLast(Comparator.naturalOrder())));
         for(Ticket ticket : tickets){
-            System.out.println("Ticket ID: " + ticket.getID() + ", Title: " + ticket.getTitle() + ", Due Date: " + (ticket.getDueDate() != null ? ticket.getDueDate() : "No Due Date"));    
-        }  
+            System.out.println("Ticket ID: " + ticket.getID() + ", Title: " + ticket.getTitle() + ", Due Date: " + (ticket.getDueDate() != null ? ticket.getDueDate() : "No Due Date"));
+        }
     }
 
     public String toString(){

@@ -2,10 +2,10 @@
 */
 
 public enum Status {
-    OPEN,
-    IN_PROGRESS,
-    WAITING_FOR_FEEDBACK,
-    CLOSED
+    OPEN,                  // Ticket ist neu und noch nicht in Bearbeitung
+    IN_PROGRESS,           // Ein Agent bearbeitet das Ticket
+    WAITING_FOR_FEEDBACK,  // Warten auf Rückmeldung des Kunden
+    CLOSED                 // Ticket ist abgeschlossen
 }
 
-//nach Feddback automatisch auf IN_PROGESS setzen
+//nach Feedback automatisch auf IN_PROGRESS setzen

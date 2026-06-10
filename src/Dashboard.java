@@ -51,10 +51,12 @@ public class Dashboard {
         }
     }
 
+    // Zählt, wie viele Tickets es pro Kategorie gibt, und gibt das Ergebnis aus.
     public void countTicketsByCategory(List<Ticket> tickets){
         Map<String, Integer> categoryCount = new HashMap<>();
         for(Ticket ticket : tickets){
             String categoryName = ticket.getCategory().getName();
+            // Zähler für die Kategorie um 1 erhöhen (0 als Startwert, falls noch nicht vorhanden)
             categoryCount.put(categoryName, categoryCount.getOrDefault(categoryName, 0) + 1);
         }
         for(Map.Entry<String, Integer> entry : categoryCount.entrySet()){

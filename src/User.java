@@ -1,4 +1,6 @@
-/* Diese Klasse repräsentiert einen Benutzer des Ticketing Tools */
+/* Diese Klasse repräsentiert einen Benutzer des Ticketing Tools.
+   Sie dient als Basisklasse für Agent und Customer und enthält die gemeinsamen
+   Eigenschaften ID, Name und E-Mail. */
 public class User {
     int id;
     String name;
@@ -37,8 +39,8 @@ public class User {
 // Priorisierung der Wichtigkeit des Users hinzufügen! x
 // Kein reines Datenbank Projekt ->Vermeiden drei schichten system Java Objekte die interargieren.Es soll nicht immer nur in die Datenbank geschrieben werden
 // System zeigt anhand von Methoden Fälligkeiten etc an.
-// Lesbarkeit, Kommentare mit Beschreibung, Tets, Persistenz , Datenspeicherung -> Serialisierung aus dateien Objekte erzeugen 
-// Kommentare wer sagt was, wann, und von wem. Kommentare sind Objekte in Listen(Chat) 
-// Klassendiagramm erstellen 
+// Lesbarkeit, Kommentare mit Beschreibung, Tets, Persistenz , Datenspeicherung -> Serialisierung aus dateien Objekte erzeugen
+// Kommentare wer sagt was, wann, und von wem. Kommentare sind Objekte in Listen(Chat)
+// Klassendiagramm erstellen
 // getter und setter Methoden prüfen (nur relevante gebraucht)
-// Arbeiten mit den Tickets, Analyse -> Dashboard bspw Kategorie 
+// Arbeiten mit den Tickets, Analyse -> Dashboard bspw Kategorie

@@ -53,9 +53,11 @@ public class Testklasse {
 
         Ticket ticket1 = new Ticket(111, "Test Ticket", "This is our very first test ticket", ticketCategory4, Status.OPEN, date1, date1, date2, customer1, null);
         Ticket ticket2 = new Ticket(112, "Another Test Ticket", "This is our second test ticket", ticketCategory4, Status.OPEN, date1, date1, date3, customer2, agent2);
+        Ticket ticket3 = new Ticket(113, "Third Test Ticket", "This is our third test ticket", ticketCategory1, Status.OPEN, date1, date1, date4, customer3, agent1);
 
         System.out.println(ticket1.toString());
         System.out.println(ticket2.toString());
+        System.out.println(ticket3.toString());
 
         Comment comment1 = new Comment (1001, "This is a comment on a ticket", ticket1, customer1, date1);
         Comment comment2 = new Comment (1002, "This is the answer to the comment", ticket1, agent1, date2);
@@ -68,6 +70,7 @@ public class Testklasse {
         TicketAdministration ticketAdmin = new TicketAdministration();
         ticketAdmin.addTicket(ticket1);
         ticketAdmin.addTicket(ticket2);
+        ticketAdmin.addTicket(ticket3);
         ticketAdmin.addAgent(agent1);
         ticketAdmin.addAgent(agent2);
         ticketAdmin.addCustomer(customer1);
@@ -89,9 +92,28 @@ public class Testklasse {
         
         System.out.println(ticketAdmin.toString());
 
+        // Verwaltungslisten mit den am Ticket beteiligten Personen füllen
+        AgentList agentList = new AgentList();
+        agentList.addAgent(agent1);
+        agentList.addAgent(agent2);
 
+        CustomerList customerList = new CustomerList();
+        customerList.addCustomer(customer1);
+        customerList.addCustomer(customer2);
+        customerList.addCustomer(customer3);
 
-        
-    
+        // ===== 3 konkrete Überprüfungs-Befehle für die 3 Tickets =====
+
+        // Befehl 1: Ersteller (Customer) von ticket1 in der CustomerList nachschlagen
+        System.out.println("Ticket 1 - Ersteller in CustomerList gefunden: "
+                + customerList.findById(ticket1.getCreatedBy().getId()));
+
+        // Befehl 2: Bearbeiter (Agent) von ticket2 in der AgentList nachschlagen
+        System.out.println("Ticket 2 - Bearbeiter in AgentList gefunden: "
+                + agentList.findById(ticket2.getResolvedBy().getId()));
+
+        // Befehl 3: Ersteller von ticket3 per Namenssuche in der CustomerList finden
+        System.out.println("Ticket 3 - Ersteller per Namenssuche: "
+                + customerList.findByName(ticket3.getCreatedBy().getName()));
     }
 }

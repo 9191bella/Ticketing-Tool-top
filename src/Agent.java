@@ -50,4 +50,4 @@ public class Agent extends User {
         return "Agent: " + getName() + " (" + getEmail() + ") - Abteilung: " + department + ", Rolle: " + role + ", Kategorie: " + category.getName() + ", Level: " + level;
     }
 }
-//First und Second level support, Kategorie hinzufügen 
+//First und Second level support, Kategorie hinzufügen

@@ -1,7 +1,11 @@
 /* Verwaltungsklasse für Agenten (vgl. Übungsblatt Phase 2, Aufgabe 2:
    "Erstellen Sie für jede Fachklasse eine Verwaltungsklasse").
    Verwaltet intern eine ArrayList von Agent-Objekten und bietet Methoden
-   zum Anlegen, Löschen, Suchen und zur sortierten Ausgabe. */
+   zum Anlegen, Löschen, Suchen und zur sortierten Ausgabe.
+
+   Ausnahmebehandlung: addAgent() wirft DuplicateIdException, falls bereits
+   ein Agent mit derselben ID existiert; findByIdOrThrow() wirft
+   ReferenceNotFoundException statt null zurückzugeben. */
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -13,7 +17,11 @@ public class AgentList {
     }
 
     // Legt einen Agenten an und fügt ihn der Verwaltung hinzu.
-    public void addAgent(Agent agent){
+    // Wirft DuplicateIdException, wenn die ID bereits vergeben ist.
+    public void addAgent(Agent agent) throws DuplicateIdException {
+        if(findById(agent.getId()) != null){
+            throw new DuplicateIdException("Agent", agent.getId());
+        }
         agents.add(agent);
     }
 
@@ -31,6 +39,16 @@ public class AgentList {
             }
         }
         return null;
+    }
+
+    // Wie findById(), wirft aber eine ReferenceNotFoundException statt null
+    // zurückzugeben, falls kein Agent mit dieser ID existiert.
+    public Agent findByIdOrThrow(int id) throws ReferenceNotFoundException {
+        Agent agent = findById(id);
+        if(agent == null){
+            throw new ReferenceNotFoundException("Agent", id);
+        }
+        return agent;
     }
 
     // Volltextsuche über den Namen (Teilstring, ohne Groß-/Kleinschreibung).

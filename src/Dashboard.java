@@ -1,5 +1,9 @@
 /*
 Diese Klasse repräsentiert das Dashboard des Ticketing Tools, welches verschiedene Methoden zur Anzeige von Tickets basierend auf unterschiedlichen Kriterien enthält. Es ermöglicht die Anzeige von offenen Tickets, Tickets nach Kategorie, Agent, Kunde, Status und innerhalb eines bestimmten Datumsbereichs. Zusätzlich gibt es eine Methode zur Zählung der Tickets nach Kategorie. Die Ausgabe erfolgt in der Konsole.
+
+Ausnahmebehandlung: showTicketsByDateRange() prüft, ob das Startdatum vor dem
+Endedatum liegt, und wirft sonst eine InvalidDateRangeException, bevor
+gefiltert wird.
 */
 import java.util.*;
 public class Dashboard {
@@ -43,7 +47,13 @@ public class Dashboard {
         }
     }
 
-    public void showTicketsByDateRange(List<Ticket> tickets, Date startDate, Date endDate){
+    // Zeigt alle Tickets, deren Erstellungsdatum zwischen startDate und endDate liegt.
+    // Wirft InvalidDateRangeException, wenn startDate NACH endDate liegt - in diesem
+    // Fall waere die Filterung sinnlos und liefert (still) immer ein leeres Ergebnis.
+    public void showTicketsByDateRange(List<Ticket> tickets, Date startDate, Date endDate) throws InvalidDateRangeException {
+        if(startDate.after(endDate)){
+            throw new InvalidDateRangeException(startDate, endDate, "Dashboard-Zeitraumfilter");
+        }
         for(Ticket ticket : tickets){
             if(ticket.getCreatedAt().after(startDate) && ticket.getCreatedAt().before(endDate)){
                 System.out.println("Ticket ID: " + ticket.getID() + ", Title: " + ticket.getTitle());
